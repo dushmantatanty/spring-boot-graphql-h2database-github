@@ -15,6 +15,7 @@
 	<description>Demo project for Spring Boot</description>
 	<properties>
 		<java.version>8</java.version>
+		<artifactory.url>https://duitracker.jfrog.io/artifactory/duitracker-libs-snapshot</artifactory.url>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -42,6 +43,15 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-deploy-plugin</artifactId>
+				<configuration>
+					<repositoryId>artifactory-releases</repositoryId>
+					<url>${artifactory.url}/maven-releases</url>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
