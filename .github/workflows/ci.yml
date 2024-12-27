@@ -1,4 +1,4 @@
-name: Build and Deploy to Artifactory
+name: Print only ci yaml
 
 on:
   push:
@@ -7,42 +7,14 @@ on:
     paths-ignore:
       - 'deploy-configs/**'
       - 'README.md'
-      - '.github/workflows/master_dui.yml'
 
 jobs:
-  build-and-deploy:
+  print:
     runs-on: ubuntu-latest
 
     steps:
       # Checkout the repository
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      # Set up JDK
-      - name: Set up JDK
-        uses: actions/setup-java@v3
-        with:
-          distribution: 'temurin'
-          java-version: '11'
-
-      # Cache Maven dependencies
-      - name: Cache Maven dependencies
-        uses: actions/cache@v3
-        with:
-          path: ~/.m2/repository
-          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
-          restore-keys: |
-            ${{ runner.os }}-m2
-
-      # Build the Maven project
-      - name: Build with Maven
-        run: mvn clean install
-
-      # Publish to JFrog Artifactory
-      - name: Publish to Artifactory
-        env:
-          ARTIFACTORY_URL: ${{ secrets.ARTIFACTORY_URL }}
-          ARTIFACTORY_USERNAME: ${{ secrets.ARTIFACTORY_USERNAME }}
-          ARTIFACTORY_PASSWORD: ${{ secrets.ARTIFACTORY_PASSWORD }}
+      - name: Console message
         run: |
-          mvn deploy -DaltDeploymentRepository=artifactory::default::${{ secrets.ARTIFACTORY_URL }}/artifactory/maven-releases
+          echo "Just simple message"
+          echo "Done testing"

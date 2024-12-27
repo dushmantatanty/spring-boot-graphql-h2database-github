@@ -1,0 +1,4 @@
+[
+  {"1": "graphiql, its like swagger to interact with graphql api", "status": false},
+  {"2": "h2, db setup and linked with graphql", "status": false}
+]
